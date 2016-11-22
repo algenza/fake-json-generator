@@ -1,0 +1,68 @@
+{
+  "type": "object",
+  "properties": {
+    "users": {
+      "type": "object",
+      "minimum": 102,
+      "maximum": 101,
+      "properties": {
+        "id": {
+          "type": "integer",
+          "unique": true,
+          "value": "faker.randomNumber"
+        },
+        "name": {
+          "type": "string",
+          "value": "faker.name"
+        },
+        "email": {
+          "type": "string",
+          "value": "faker.email"
+        },
+        "hallo": {
+          "type": "string",
+          "value": "hallo"
+        },
+        "phone": {
+          "type": "array",
+          "minimum": 1,
+          "maximum": 1,
+          "items": {
+            "type": "string",
+            "value": "faker.e164PhoneNumber"
+          }
+        }
+      },
+      "required": ["id", "name", "email"]
+    },
+    "companies" : {
+      "type": "object",
+      "minimum": 10,
+      "maximum": 20,
+      "properties":{
+        "id": {
+          "type": "integer",
+          "unique": true,
+          "value": "faker.randomNumber"
+        },
+        "name": {
+          "type": "string",
+          "value": "faker.company"
+        },
+        "address": {
+          "type": "string",
+          "value": "faker.streetAddress"        
+        }
+      },
+      "required": ["id", "name", "address"]
+    }
+  },
+  "required": ["user"],
+  "definitions": {
+    "positiveInt": {
+      "type": "integer",
+      "minimum": 0,
+      "exclusiveMinimum": true
+    }
+  }
+}
