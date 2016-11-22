@@ -1,4 +1,4 @@
 # Fake Json Generator
 
 ## Lisence
-WTFPL
+MIT

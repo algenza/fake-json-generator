@@ -10,7 +10,7 @@
             "Algenza\\Fjg\\": "src/"
         }
 
-    },    "license": "WTFPL",
+    },    "license": "MIT",
     "authors": [
         {
             "name": "Billy Renyut",
