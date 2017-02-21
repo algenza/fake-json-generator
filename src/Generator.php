@@ -28,7 +28,6 @@ class Generator
 			$this->validator->validateJson($this->schemaPath);
 
 			$parsedSchema = (new Parser($this->schemaPath))->parse();
-			echo 'schema parsed';
 			$jsonizer = new Jsonizer($parsedSchema, $this->jsonFile);
 			$jsonizer->run();
 
