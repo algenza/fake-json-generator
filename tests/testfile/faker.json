@@ -606,7 +606,7 @@
         "uniqueRandomDigit": {
           "value": "faker.numberBetween",
           "args": [1,7],
-          "unique":true,        
+          "unique":true
         }
       }      
     },
@@ -623,14 +623,23 @@
           }
         }
       }      
+    },
+    "fakerFromDefinitions" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "lowerThanZero": {
+          "definition": "negativeNumber"
+        }
+      }      
     }
   },
-  "required": ["user"],
+  "required": ["fakerFromDefinitions"],
   "definitions": {
-    "positiveInt": {
-      "type": "integer",
-      "minimum": 0,
-      "exclusiveMinimum": true
+    "negativeNumber": {
+      "value": "faker.numberBetween",
+      "args": [-2147483647,-1]
     }
   }
 }

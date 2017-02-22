@@ -1,1 +1,4 @@
 /vendor
+composer.lock
+/tests/testfile/faker_created.json
+/tests/testfile/db.json

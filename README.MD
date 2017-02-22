@@ -7,7 +7,7 @@ composer require algenza/fake-json-generator
 ```
 
 ## How to use?
-Make simple schema
+Make schema
 ```sh
 {
     "type": "object",
@@ -18,20 +18,16 @@ Make simple schema
             "maximum": 101,
             "properties": {
                 "id": {
-                    "type": "integer",
-                    "unique": true,
                     "value": "faker.randomNumber"
+                    "unique": true,
                 },
                 "name": {
-                    "type": "string",
                     "value": "faker.name"
                 },
                 "email": {
-                    "type": "string",
                     "value": "faker.email"
                 },
                 "hallo": {
-                    "type": "string",
                     "value": "hallo"
                 },
                 "phone": {
@@ -39,12 +35,48 @@ Make simple schema
                     "minimum": 1,
                     "maximum": 1,
                     "items": {
-                        "type": "string",
                         "value": "faker.e164PhoneNumber"
                     }
                 }
-            },
-            "required": ["id", "name", "email"]
+            }
+        },
+        "Companies": {
+            "type": "object",
+            "minimum": 20,
+            "maximum": 20,
+            "properties": {
+                "id": {
+                    "definition" : "uniqueId"
+                },
+                "name": {
+                    "value": "faker.company"
+                    "unique": true
+                },
+                "suffix": {
+                    "value": "faker.companySuffix"
+                },
+                "address": {
+                    "value": "faker.streetName"
+                },
+                "type": {
+                    "value": "Type A"
+                },
+                "phone": {
+                    "type": "array",
+                    "minimum": 1,
+                    "maximum": 1,
+                    "items": {
+                        "value": "faker.e164PhoneNumber"
+                    }
+                }
+            }
+        }
+    },
+    "required": ["users","companies"],
+    "definitions" : {
+        "uniqueId" : {
+            "value": "faker.randomNumber",
+            "unique": true          
         }
     }
 }

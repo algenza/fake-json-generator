@@ -39,7 +39,9 @@ class Jsonizer
 		}
 
 		foreach ($this->schema->properties as $key => $value) {
-			$this->jsonContent->{$key} = $this->trackdown($value);
+			if(in_array($key, $this->schema->required)){
+				$this->jsonContent->{$key} = $this->trackdown($value);
+			}
 		}
 
 		$toJson = json_encode($this->jsonContent,JSON_PRETTY_PRINT);
@@ -66,6 +68,12 @@ class Jsonizer
 					$arrayCols[] = $this->trackdown($value->items);
 				}
 				return $arrayCols;
+			}
+		}
+
+		if(isset($value->definition)){
+			if(isset($this->definitions->{$value->definition})){
+				$value = $this->definitions->{$value->definition};
 			}
 		}
 
