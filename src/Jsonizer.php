@@ -172,32 +172,5 @@ class Jsonizer
 			throw new \Exception($formatter.":".$e->getMessage(), 1);	
 		}
 	}
-	private function fakerMaker2($formatter, $isUnique = false, $optional = false, $param = [], $provider = null)
-	{
-		try {
-			if(isset($provider)){
-				$providerClass = '\\Faker\\Provider\\'.$provider['locale'].'\\'.$provider['formatter'];
-				$this->arrayFaker->addProvider(new $providerClass($this->arrayFaker));
-			}
-			if($isUnique){
-				$this->arrayFaker = $this->arrayFaker->unique(false,100);
-			}
-			if($optional){
-				$FakeOption = $this->arrayFaker->optional(
-					(isset($optional->weight))?$optional->weight:0.5,
-					(isset($optional->default))?$optional->default:null
-					);
-				if($FakeOption instanceof \Faker\DefaultGenerator){
-					return $FakeOption->default;
-				}
-				$this->arrayFaker = $FakeOption;
-			}
-			if(isset($param)){
-				return call_user_func_array([$this->arrayFaker, $formatter],$param);			
-			}
-			return call_user_func([$this->arrayFaker, $formatter]);			
-		} catch (\Exception $e) {
-			throw new \Exception($formatter.":".$e->getMessage(), 1);	
-		}
-	}
+
 }
