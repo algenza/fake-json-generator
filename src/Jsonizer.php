@@ -50,32 +50,46 @@ class Jsonizer
 	private function trackdown($value)
 	{
 		$generateAmount = $this->decideItemCount($value);
+		if (isset($value->type)) {
+			if($value->type == 'object'){
+				$objectCols = [];
+				$this->faker = Factory::create();
 
-		if($value->type == 'object'){
-			$objectCols = [];
-
-			for ($i=0; $i < $generateAmount; $i++) { 
-				$objectCols[] = $this->generateObj($value->properties);
-			}
-			return $objectCols;
-		}else if($value->type == 'array'){
-			$arrayCols = [];
-			for ($i=0; $i < $generateAmount; $i++) { 
-				$arrayCols[] = $this->trackdown($value->items);
-			}
-			return $arrayCols;
-		}else{
-			$unique = false;
-			if(isset($value->unique)){
-				if($value->unique){
-					$unique = true;
+				for ($i=0; $i < $generateAmount; $i++) { 
+					$objectCols[] = $this->generateObj($value->properties);
 				}
+				return $objectCols;
+			}else if($value->type == 'array'){
+				// $this->faker = $this->faker->unique(true);
+				$arrayCols = [];
+				for ($i=0; $i < $generateAmount; $i++) { 
+					$arrayCols[] = $this->trackdown($value->items);
+				}
+				return $arrayCols;
 			}
-			if(preg_match("/^faker.[a-zA-z]+[0-9a-zA-Z]*$/i",$value->value)){
-				return $this->fakerMaker($this->getFakerFormatter($value->value),$unique);
-			}
-			return $value->value;
 		}
+
+		$unique = false;
+		if(isset($value->unique)){
+			$unique = $value->unique;
+		}
+		$optional = false;
+		if(isset($value->optional)){
+			$optional = $value->optional;
+		}
+		if(preg_match("/^faker.[a-zA-z]+[0-9a-zA-Z]*$/i",$value->value)){
+			$args = [];
+			if(isset($value->args)){
+				$args = $value->args;
+			}
+			$provider = null;
+			if(isset($value->provider)){
+				$provider = (array)$value->provider;
+			}
+			return $this->fakerMaker($this->getFakerFormatter($value->value), $unique, $optional, $args, $provider);
+		}
+		return $value->value;
+		
 	}
 	
 	private function getFakerFormatter($value)
@@ -117,11 +131,32 @@ class Jsonizer
 		return $newObj;
 	}
 
-	private function fakerMaker($formatter, $isUnique = false)
+	private function fakerMaker($formatter, $isUnique = false, $optional = false, $param = [], $provider = null)
 	{
-		if($isUnique){
-			return $this->faker->unique()->{$formatter};
+		try {
+			if(isset($provider)){
+				$providerClass = '\\Faker\\Provider\\'.$provider['locale'].'\\'.$provider['formatter'];
+				$this->faker->addProvider(new $providerClass($this->faker));
+			}
+			if($isUnique){
+				$this->faker = $this->faker->unique(false,100);
+			}
+			if($optional){
+				$FakeOption = $this->faker->optional(
+					(isset($optional->weight))?$optional->weight:0.5,
+					(isset($optional->default))?$optional->default:null
+					);
+				if($FakeOption instanceof \Faker\DefaultGenerator){
+					return $FakeOption->default;
+				}
+				$this->faker = $FakeOption;
+			}
+			if(isset($param)){
+				return call_user_func_array([$this->faker, $formatter],$param);			
+			}
+			return call_user_func([$this->faker, $formatter]);			
+		} catch (\Exception $e) {
+			throw new \Exception($formatter.":".$e->getMessage(), 1);	
 		}
-		return $this->faker->{$formatter};
 	}
 }
