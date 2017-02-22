@@ -9,6 +9,7 @@ class Jsonizer
 	private $definitions = [];
 	private $required;
 	private $faker;
+	private $arrayFaker;
 	private $jsonFilePath;
 
 	private $defaultMin = 5;
@@ -40,7 +41,7 @@ class Jsonizer
 
 		foreach ($this->schema->properties as $key => $value) {
 			if(in_array($key, $this->schema->required)){
-				$this->jsonContent->{$key} = $this->trackdown($value);
+				$this->jsonContent->{$key} = $this->trackdown($value,false, $this->faker);
 			}
 		}
 
@@ -49,23 +50,25 @@ class Jsonizer
 		file_put_contents($this->jsonFilePath,$toJson);
 	}
 
-	private function trackdown($value)
+	private function trackdown($value, $isArray = false, $generator)
 	{
 		$generateAmount = $this->decideItemCount($value);
 		if (isset($value->type)) {
 			if($value->type == 'object'){
 				$objectCols = [];
-				$this->faker = Factory::create();
+				// gc_collect_cycles();
+				$faker = Factory::create();
 
 				for ($i=0; $i < $generateAmount; $i++) { 
-					$objectCols[] = $this->generateObj($value->properties);
+					$objectCols[] = $this->generateObj($value->properties, $faker);
 				}
 				return $objectCols;
 			}else if($value->type == 'array'){
-				// $this->faker = $this->faker->unique(true);
 				$arrayCols = [];
+				// gc_collect_cycles();
+				$arrayFaker = Factory::create();
 				for ($i=0; $i < $generateAmount; $i++) { 
-					$arrayCols[] = $this->trackdown($value->items);
+					$arrayCols[] = $this->trackdown($value->items,true,$arrayFaker);
 				}
 				return $arrayCols;
 			}
@@ -94,6 +97,8 @@ class Jsonizer
 			if(isset($value->provider)){
 				$provider = (array)$value->provider;
 			}
+			$this->faker = $generator;
+			
 			return $this->fakerMaker($this->getFakerFormatter($value->value), $unique, $optional, $args, $provider);
 		}
 		return $value->value;
@@ -130,11 +135,11 @@ class Jsonizer
 		return rand($value->minimum, $value->maximum);
 	}
 
-	private function generateObj($props)
+	private function generateObj($props, $generator)
 	{	
 		$newObj = new \stdClass();
 		foreach ($props as $key => $value) {
-			$newObj->{$key} = $this->trackdown($value);
+			$newObj->{$key} = $this->trackdown($value, false, $generator);
 		}
 		return $newObj;
 	}
@@ -163,6 +168,34 @@ class Jsonizer
 				return call_user_func_array([$this->faker, $formatter],$param);			
 			}
 			return call_user_func([$this->faker, $formatter]);			
+		} catch (\Exception $e) {
+			throw new \Exception($formatter.":".$e->getMessage(), 1);	
+		}
+	}
+	private function fakerMaker2($formatter, $isUnique = false, $optional = false, $param = [], $provider = null)
+	{
+		try {
+			if(isset($provider)){
+				$providerClass = '\\Faker\\Provider\\'.$provider['locale'].'\\'.$provider['formatter'];
+				$this->arrayFaker->addProvider(new $providerClass($this->arrayFaker));
+			}
+			if($isUnique){
+				$this->arrayFaker = $this->arrayFaker->unique(false,100);
+			}
+			if($optional){
+				$FakeOption = $this->arrayFaker->optional(
+					(isset($optional->weight))?$optional->weight:0.5,
+					(isset($optional->default))?$optional->default:null
+					);
+				if($FakeOption instanceof \Faker\DefaultGenerator){
+					return $FakeOption->default;
+				}
+				$this->arrayFaker = $FakeOption;
+			}
+			if(isset($param)){
+				return call_user_func_array([$this->arrayFaker, $formatter],$param);			
+			}
+			return call_user_func([$this->arrayFaker, $formatter]);			
 		} catch (\Exception $e) {
 			throw new \Exception($formatter.":".$e->getMessage(), 1);	
 		}
