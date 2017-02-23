@@ -155,8 +155,7 @@
         "vat": {
           "value": "faker.vat",
           "provider": {
-            "locale": "at_AT",
-            "formatter": "Payment"
+            "source": "\\Faker\\Provider\\at_AT\\Payment"
           }
         }
       }      
@@ -629,13 +628,55 @@
       "minimum": 20,
       "maximum": 20,
       "properties": {
+        "id": {
+          "value": "faker.incrementInteger",
+          "args": [1],
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          }
+        },
         "lowerThanZero": {
           "definition": "negativeNumber"
         }
       }      
+    },
+    "fakerIncrement" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "incrementNumber": {
+          "value": "faker.incrementInteger",
+          "args": [1],
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          }
+        }
+      }      
     }
   },
-  "required": ["fakerFromDefinitions"],
+  "required": [
+    "fakerName",
+    "fakerLocation",
+    "fakerBarcode",
+    "fakePhone",
+    "fakerCompany",
+    "fakerCreditCard",
+    "fakerText",
+    "fakerInternetAndMail",
+    "fakerDateTime",
+    "fakerMisc",
+    "fakerBase",
+    "fakerBiasNumber",
+    "fakerUserAgentOS",
+    "fakerUuid",
+    "fakerMimeAndFile",
+    "fakerColor",
+    "fakerUnique",
+    "fakerOptional",
+    "fakerFromDefinitions",
+    "fakerIncrement"
+  ],
   "definitions": {
     "negativeNumber": {
       "value": "faker.numberBetween",

@@ -11,11 +11,13 @@ class Generator
 	private $jsonFile;
 	private $validator;
 	private $parser;
+	private $locale;
 
-	public function __construct($pathToSchema, $pathToJson)
+	public function __construct($pathToSchema, $pathToJson, $locale = 'en_US')
 	{
 		$this->schemaPath = $pathToSchema;
 		$this->jsonFile = $pathToJson;
+		$this->locale = $locale;;
 		$this->validator = new Validator;
 		
 	}
@@ -28,7 +30,7 @@ class Generator
 			$this->validator->validateJson($this->schemaPath);
 
 			$parsedSchema = (new Parser($this->schemaPath))->parse();
-			$jsonizer = new Jsonizer($parsedSchema, $this->jsonFile);
+			$jsonizer = new Jsonizer($parsedSchema, $this->jsonFile, $this->locale);
 			$jsonizer->run();
 
 		}catch (\Exception $e){
