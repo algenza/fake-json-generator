@@ -60,7 +60,6 @@ class Jsonizer
 		if (isset($value->type)) {
 			if($value->type == 'object'){
 				$objectCols = [];
-				// gc_collect_cycles();
 				$faker = Factory::create($this->locale);
 				$this->formatters = [];
 				for ($i=0; $i < $generateAmount; $i++) { 
@@ -69,7 +68,6 @@ class Jsonizer
 				return $objectCols;
 			}else if($value->type == 'array'){
 				$arrayCols = [];
-				// gc_collect_cycles();
 				$arrayFaker = Factory::create($this->locale);
 				for ($i=0; $i < $generateAmount; $i++) { 
 					$arrayCols[] = $this->trackdown($value->items,true,$arrayFaker);
