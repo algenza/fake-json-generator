@@ -11,17 +11,21 @@ class Jsonizer
 	private $faker;
 	private $arrayFaker;
 	private $jsonFilePath;
+	private $locale;
+	private $formatters = [];
+	private $resetList = ["incrementInteger"];
 
 	private $defaultMin = 5;
 	private $defaultMax = 10;
 
 	private $systemMax = 100;
 
-	function __construct(\stdClass $schema, $jsonFile)
+	function __construct(\stdClass $schema, $jsonFile, $locale)
 	{
 		$this->schema = $schema;
 		$this->jsonFilePath = $jsonFile;
-		$this->faker = Factory::create();
+		$this->locale = $locale;
+		$this->faker = Factory::create($locale);
 		$this->jsonContent = new \stdClass();
 	}
 
@@ -56,17 +60,15 @@ class Jsonizer
 		if (isset($value->type)) {
 			if($value->type == 'object'){
 				$objectCols = [];
-				// gc_collect_cycles();
-				$faker = Factory::create();
-
+				$faker = Factory::create($this->locale);
+				$this->formatters = [];
 				for ($i=0; $i < $generateAmount; $i++) { 
 					$objectCols[] = $this->generateObj($value->properties, $faker);
 				}
 				return $objectCols;
 			}else if($value->type == 'array'){
 				$arrayCols = [];
-				// gc_collect_cycles();
-				$arrayFaker = Factory::create();
+				$arrayFaker = Factory::create($this->locale);
 				for ($i=0; $i < $generateAmount; $i++) { 
 					$arrayCols[] = $this->trackdown($value->items,true,$arrayFaker);
 				}
@@ -98,9 +100,20 @@ class Jsonizer
 				$provider = (array)$value->provider;
 			}
 			$this->faker = $generator;
-			
-			return $this->fakerMaker($this->getFakerFormatter($value->value), $unique, $optional, $args, $provider);
+			$formatter = $this->getFakerFormatter($value->value);
+			$reset = false;
+			if(!isset($this->formatters[$formatter])){
+				$this->formatters[$formatter] = true;
+				if($unique){
+					$reset = true;
+				}
+				if(in_array($formatter, $this->resetList)){
+					$args[] = true;
+				}
+			}
+			return $this->fakerMaker($formatter, $unique, $optional, $args, $provider, $reset);
 		}
+
 		return $value->value;
 		
 	}
@@ -144,15 +157,14 @@ class Jsonizer
 		return $newObj;
 	}
 
-	private function fakerMaker($formatter, $isUnique = false, $optional = false, $param = [], $provider = null)
+	private function fakerMaker($formatter, $isUnique = false, $optional = false, $param = [], $provider = null, $reset = false)
 	{
 		try {
 			if(isset($provider)){
-				$providerClass = '\\Faker\\Provider\\'.$provider['locale'].'\\'.$provider['formatter'];
-				$this->faker->addProvider(new $providerClass($this->faker));
+				$this->faker->addProvider(new $provider['source']($this->faker));
 			}
 			if($isUnique){
-				$this->faker = $this->faker->unique(false,100);
+				$this->faker = $this->faker->unique($reset,100);
 			}
 			if($optional){
 				$FakeOption = $this->faker->optional(

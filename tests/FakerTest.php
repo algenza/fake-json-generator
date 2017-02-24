@@ -23,7 +23,7 @@ class FakerTest extends PHPUnit_Framework_TestCase
 		$schemaPath = $path['faker'];
 		$jsonTargetPath = $path['faker_result'];
 
-		$generator = new Generator($schemaPath, $jsonTargetPath);
+		$generator = new Generator($schemaPath, $jsonTargetPath,'id_ID');
 
 		$generator->run();	
 	}
