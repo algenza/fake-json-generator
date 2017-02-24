@@ -13,7 +13,7 @@ class Jsonizer
 	private $jsonFilePath;
 	private $locale;
 	private $formatters = [];
-	private $resetList = ["incrementInteger"];
+	private $resetList = ["incrementInteger","foreignKey"];
 
 	private $defaultMin = 5;
 	private $defaultMax = 10;
@@ -53,7 +53,22 @@ class Jsonizer
 
 		file_put_contents($this->jsonFilePath,$toJson);
 	}
-
+	public function collectFKList($source, $keyId = 'id')
+	{
+		$keyList = [];
+		if(isset($this->jsonContent->{$source})){
+			foreach ($this->jsonContent->{$source} as $srcObj) {
+				if(isset($srcObj->{$keyId})){
+					$keyList[] = $srcObj->{$keyId};
+				}else{
+					throw new Exception("FK Config Key not exist:".$keyId, 1);						
+				}
+			}
+			return $keyList;		
+		}
+		throw new \Exception("FK Config source not exist :".$source, 1);
+		
+	}
 	private function trackdown($value, $isArray = false, $generator)
 	{
 		$generateAmount = $this->decideItemCount($value);
@@ -98,6 +113,15 @@ class Jsonizer
 			$provider = null;
 			if(isset($value->provider)){
 				$provider = (array)$value->provider;
+				if(isset($value->fkConfig)){
+					if(!isset($value->fkConfig->source)){
+						throw new \Exception("FK Config needs source schema", 1);						
+					}
+					if(!isset($value->fkConfig->key)){
+						$value->fkConfig->key = 'id';
+					}
+					$args [] = $this->collectFKList($value->fkConfig->source,$value->fkConfig->key);
+				}
 			}
 			$this->faker = $generator;
 			$formatter = $this->getFakerFormatter($value->value);

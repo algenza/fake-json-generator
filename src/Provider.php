@@ -15,4 +15,12 @@ class Provider extends \Faker\Provider\Base
 		}
 		return static::$incremental++;
 	}
+
+	public function foreignKey($keyList)
+	{
+		$max = count($keyList)-1;
+		$index = rand(0,$max);
+		return $keyList[$index];
+	}
+
 }

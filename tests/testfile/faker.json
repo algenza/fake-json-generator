@@ -653,6 +653,32 @@
           }
         }
       }      
+    },
+    "fakerFKMany" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "incrementNumber": {
+          "value": "faker.incrementInteger",
+          "args": [1],
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          }
+        },
+        "fkFrom_fakerFromDefinitions": {
+          "value": "faker.foreignKey",
+          "unique": true,
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          },
+          "fkConfig": {
+            "source": "fakerFromDefinitions",
+            "key": "id",
+            "multiple": false
+          }
+        }
+      }     
     }
   },
   "required": [
@@ -675,7 +701,8 @@
     "fakerUnique",
     "fakerOptional",
     "fakerFromDefinitions",
-    "fakerIncrement"
+    "fakerIncrement",
+    "fakerFKMany"
   ],
   "definitions": {
     "negativeNumber": {
