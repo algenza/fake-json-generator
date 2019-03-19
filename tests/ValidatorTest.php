@@ -3,7 +3,7 @@
 use Algenza\Fjg\Validator;
 use PHPUnit\Framework\TestCase;
 
-class ValidatorTest extends PHPUnit_Framework_TestCase
+class ValidatorTest extends TestCase
 {
 	private function getPathList()
 	{
@@ -29,11 +29,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 		$this->assertEmpty($validator->validatePath($path['valid']));
 		$this->assertEmpty($validator->validatePath($path['invalid_ext']));
 	}
-	/**
-    * @expectedException \Exception
-    */
+
 	public function testValidPathWithException()
 	{
+		$this->expectException(\Exception::class);
 		$path = $this->getPathList();
 
 		$validator = new Validator;
@@ -50,11 +49,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 		$this->assertEmpty($validator->validateExtension($path['valid']));
 	}
 
-	/**
-    * @expectedException \Exception
-    */
+
 	public function testValidExtensionWithException()
 	{
+		$this->expectException(\Exception::class);
 		$path = $this->getPathList();
 
 		$validator = new Validator;
@@ -70,11 +68,10 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEmpty($validator->validateJson($path['valid']));
 	}
-	/**
-    * @expectedException \Exception
-    */
+
 	public function testValidJsonWithException()
 	{
+		$this->expectException(\Exception::class);
 		$path = $this->getPathList();
 
 		$validator = new Validator;
@@ -82,22 +79,20 @@ class ValidatorTest extends PHPUnit_Framework_TestCase
 		$validator->validateJson($path['invalid']);
 	}
 
-	/**
-    * @expectedException \Exception
-    */
+
 	public function testValidJsonWithException2()
 	{
+		$this->expectException(\Exception::class);
 		$path = $this->getPathList();
 
 		$validator = new Validator;
 
 		$validator->validateJson($path['invalid2']);
 	}
-	/**
-    * @expectedException \Exception
-    */
+
 	public function testValidJsonWithException3()
 	{
+		$this->expectException(\Exception::class);
 		$path = $this->getPathList();
 
 		$validator = new Validator;

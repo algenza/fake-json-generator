@@ -3,7 +3,7 @@
 use Algenza\Fjg\Generator;
 use PHPUnit\Framework\TestCase;
 
-class FakerTest extends PHPUnit_Framework_TestCase
+class FakerTest extends TestCase
 {
 	private function getPathList()
 	{
@@ -25,6 +25,7 @@ class FakerTest extends PHPUnit_Framework_TestCase
 
 		$generator = new Generator($schemaPath, $jsonTargetPath,'id_ID');
 
-		$generator->run();	
-	}
+		$generator->run();
+		$this->assertTrue(is_file($path['faker_result']));
+	}	
 }
