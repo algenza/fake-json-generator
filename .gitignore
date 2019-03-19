@@ -2,3 +2,8 @@
 composer.lock
 /tests/testfile/faker_created.json
 /tests/testfile/db.json
+/tests/_js
+/tests/_css
+/tests/_icons
+/tests/*.html
+.phpunit.result.cache
