@@ -3,7 +3,7 @@
     "description": "Fake Json Generator for mocking API",
     "type": "library",
     "require": {
-        "fzaninotto/faker": "^1.6"
+        "fzaninotto/faker": "^1"
     },
     "autoload": {
         "psr-4": {
@@ -18,6 +18,6 @@
         }
     ],
     "require-dev": {
-        "phpunit/phpunit": "^4.8"
+        "phpunit/phpunit": "^8.0"
     }
 }
