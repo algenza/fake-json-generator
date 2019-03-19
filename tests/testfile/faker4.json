@@ -1,0 +1,712 @@
+{
+  "type": "object",
+  "properties": {
+    "fakerName": {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "name": {
+          "value": "faker.name"
+        },
+        "firstName": {
+          "value": "faker.firstName"
+        },
+        "firstNameMale": {
+          "value": "faker.firstNameMale",
+          "args":[]
+        },
+        "firstNameFemale": {
+          "value": "faker.firstNameFemale"
+        },
+        "lastName": {
+          "value": "faker.lastName"
+        },
+        "title": {
+          "value": "faker.title"
+        },
+        "titleMale": {
+          "value": "faker.titleMale"
+        },
+        "titleFemale": {
+          "value": "faker.titleFemale"
+        }
+      }
+    },
+    "fakerLocation" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "citySuffix": {
+          "value": "faker.citySuffix"
+        },
+        "streetSuffix": {
+          "value": "faker.streetSuffix"
+        },
+        "buildingNumber": {
+          "value": "faker.buildingNumber"
+        },
+        "city": {
+          "value": "faker.city"
+        },
+        "streetName": {
+          "value": "faker.streetName"
+        },
+        "streetAddress": {
+          "value": "faker.streetAddress"
+        },
+        "postcode": {
+          "value": "faker.postcode"
+        },
+        "address": {
+          "value": "faker.address"
+        },
+        "country": {
+          "value": "faker.country"
+        },
+        "latitude": {
+          "value": "faker.latitude"
+        },
+        "longitude": {
+          "value": "faker.longitude"
+        }
+      }      
+    },
+    "fakerBarcode" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "ean13": {
+          "value": "faker.ean13"
+        },
+        "ean8": {
+          "value": "faker.ean8"
+        },
+        "isbn13": {
+          "value": "faker.isbn13"
+        },
+        "isbn10": {
+          "value": "faker.isbn10"
+        }
+      }      
+    },
+    "fakePhone" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "phoneNumber": {
+          "value": "faker.phoneNumber"
+        }
+      }      
+    },
+    "fakerCompany" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "company": {
+          "value": "faker.company"
+        },
+        "companySuffix": {
+          "value": "faker.companySuffix"
+        },
+        "jobTitle": {
+          "value": "faker.jobTitle"
+        }
+      }      
+    },
+    "fakerCreditCard" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "creditCardType": {
+          "value": "faker.creditCardType"
+        },
+        "creditCardNumber": {
+          "value": "faker.creditCardNumber"
+        },
+        "creditCardNumberWithArgs": {
+          "value": "faker.creditCardNumber",
+          "args": ["MasterCard",true,"-"]
+        },
+        "creditCardExpirationDate": {
+          "value": "faker.creditCardExpirationDate"
+        },
+        "creditCardExpirationDateString": {
+          "value": "faker.creditCardExpirationDateString"
+        },
+        "creditCardDetails": {
+          "value": "faker.creditCardDetails"
+        },
+        "bankAccountNumber": {
+          "value": "faker.bankAccountNumber"
+        },
+        "iban": {
+          "value": "faker.iban",
+          "args": ["ID","test",20]
+        },
+        "swiftBicNumber": {
+          "value": "faker.swiftBicNumber"
+        },
+        "vat": {
+          "value": "faker.vat",
+          "provider": {
+            "source": "\\Faker\\Provider\\at_AT\\Payment"
+          }
+        }
+      }      
+    },
+    "fakerText" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "word": {
+          "value": "faker.word"
+        },
+        "words": {
+          "value": "faker.words"
+        },
+        "wordsWithArgsText": {
+          "value": "faker.words",
+          "args": [10,true]
+        },
+        "wordsWithArgsArray": {
+          "value": "faker.words",
+          "args": [10,false]
+        },
+        "sentence": {
+          "value": "faker.sentence"
+        },
+        "sentenceWithArgsFixNumber": {
+          "value": "faker.sentence",
+          "args": [20,false]
+        },
+        "sentenceWithArgsVariableNumber": {
+          "value": "faker.sentence",
+          "args": [20,true]
+        },
+        "sentences": {
+          "value": "faker.sentences"
+        },
+        "sentencesWithArgsText": {
+          "value": "faker.sentences",
+          "args": [10,true]
+        },
+        "sentencesWithArgsArray": {
+          "value": "faker.sentences",
+          "args": [10,false]
+        },
+        "paragraph": {
+          "value": "faker.paragraph"
+        },
+        "paragraphWithArgsFixNumber": {
+          "value": "faker.paragraph",
+          "args": [5,false]
+        },
+        "paragraphWithArgsVariableNumber": {
+          "value": "faker.paragraph",
+          "args": [5,true]
+        },
+        "paragraphs": {
+          "value": "faker.paragraphs"
+        },
+        "paragraphsWithArgsText": {
+          "value": "faker.paragraphs",
+          "args": [3,true]
+        },
+        "paragraphsWithArgsArray": {
+          "value": "faker.paragraphs",
+          "args": [3,false]
+        },
+        "text": {
+          "value": "faker.text",
+          "args": [100]
+        },
+        "realText": {
+          "value": "faker.realText",
+          "args": [100,2]
+        }
+      }      
+    },
+    "fakerInternetAndMail" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "email": {
+          "value": "faker.email"
+        },
+        "safeEmail": {
+          "value": "faker.safeEmail"
+        },
+        "freeEmail": {
+          "value": "faker.freeEmail"
+        },
+        "companyEmail": {
+          "value": "faker.companyEmail"
+        },
+        "freeEmailDomain": {
+          "value": "faker.freeEmailDomain"
+        },
+        "safeEmailDomain": {
+          "value": "faker.safeEmailDomain"
+        },
+        "userName": {
+          "value": "faker.userName"
+        },
+        "password": {
+          "value": "faker.password"
+        },
+        "passwordWithArgs": {
+          "value": "faker.password",
+          "args": [7,15]
+        },
+        "domainName": {
+          "value": "faker.domainName"
+        },
+        "domainWord": {
+          "value": "faker.domainWord"
+        },
+        "tld": {
+          "value": "faker.tld"
+        },
+        "url": {
+          "value": "faker.url"
+        },
+        "slug": {
+          "value": "faker.slug"
+        },
+        "slugWithArgsFixNumber": {
+          "value": "faker.slug",
+          "args": [6,false]
+        },
+        "slugWithArgsVariableNumber": {
+          "value": "faker.slug",
+          "args": [6,true]
+        },
+        "ipv4": {
+          "value": "faker.ipv4"
+        },
+        "ipv6": {
+          "value": "faker.ipv6"
+        },
+        "localIpv4": {
+          "value": "faker.localIpv4"
+        },
+        "macAddress": {
+          "value": "faker.macAddress"
+        }
+      }      
+    },
+    "fakerDateTime" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "unixTime": {
+          "value": "faker.unixTime"
+        },
+        "dateTime": {
+          "value": "faker.dateTime"
+        },
+        "dateTimeAD": {
+          "value": "faker.dateTimeAD"
+        },
+        "iso8601": {
+          "value": "faker.iso8601"
+        },
+        "dateTimeThisCentury": {
+          "value": "faker.dateTimeThisCentury"
+        },
+        "dateTimeThisDecade": {
+          "value": "faker.dateTimeThisDecade"
+        },
+        "dateTimeThisYear": {
+          "value": "faker.dateTimeThisYear"
+        },
+        "dateTimeThisMonth": {
+          "value": "faker.dateTimeThisMonth"
+        },
+        "amPm": {
+          "value": "faker.amPm"
+        },
+        "dayOfMonth": {
+          "value": "faker.dayOfMonth"
+        },
+        "dayOfWeek": {
+          "value": "faker.dayOfWeek"
+        },
+        "month": {
+          "value": "faker.month"
+        },
+        "monthName": {
+          "value": "faker.monthName"
+        },
+        "year": {
+          "value": "faker.year"
+        },
+        "century": {
+          "value": "faker.century"
+        },
+        "timezone": {
+          "value": "faker.timezone"
+        },
+        "date": {
+          "value": "faker.date",
+          "args" : ["Y-m-d","now"]
+        },
+        "time": {
+          "value": "faker.time",
+          "args" : ["H:i:s","now"]
+        },
+        "dateTimeBetween": {
+          "value": "faker.dateTimeBetween",
+          "args": ["-10 years","now"]
+        }
+      }      
+    },
+    "fakerMisc" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "md5": {
+          "value": "faker.md5"
+        },
+        "sha1": {
+          "value": "faker.sha1"
+        },
+        "sha256": {
+          "value": "faker.sha256"
+        },
+        "locale": {
+          "value": "faker.locale"
+        },
+        "countryCode": {
+          "value": "faker.countryCode"
+        },
+        "countryISOAlpha3": {
+          "value": "faker.countryISOAlpha3"
+        },
+        "languageCode": {
+          "value": "faker.languageCode"
+        },
+        "currencyCode": {
+          "value": "faker.currencyCode"
+        },
+        "boolean": {
+          "value": "faker.boolean"
+        },
+        "booleanWithTrueChance": {
+          "value": "faker.boolean",
+          "args": [50]
+        }
+      }      
+    },
+    "fakerBase" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "randomDigit": {
+          "value": "faker.randomDigit"
+        },
+        "randomDigitNotNull": {
+          "value": "faker.randomDigitNotNull"
+        },
+        "randomLetter": {
+          "value": "faker.randomLetter"
+        },
+        "randomAscii": {
+          "value": "faker.randomAscii"
+        },
+        "randomNumber": {
+          "value": "faker.randomNumber",
+          "args": [5,false]
+        },
+        "randomKey": {
+          "value": "faker.randomKey",
+          "args": [[1231,"aasdasda",6754867,"8jg8e4h5"]]
+        },
+        "numberBetween": {
+          "value": "faker.numberBetween",
+          "args": [1,100]
+        },
+        "randomFloat": {
+          "value": "faker.randomFloat",
+          "args": [2,10,20]
+        },
+        "randomElement": {
+          "value": "faker.randomElement",
+          "args": [["a","b","c"]]
+        },
+        "randomElements": {
+          "value": "faker.randomElements",
+          "args": [["a","b","c"],2]
+        },
+        "shuffle": {
+          "value": "faker.shuffle",
+          "args": ["shuffle me"]
+        },
+        "shuffleArray": {
+          "value": "faker.shuffleArray",
+          "args": [["shuffle","me","once","again"]]
+        },
+        "shuffleString": {
+          "value": "faker.shuffleString",
+          "args": ["shufflethisstring","UTF-8"]
+        },
+        "numerify": {
+          "value": "faker.numerify",
+          "args": ["My math score = ##"]
+        },
+        "lexify": {
+          "value": "faker.lexify",
+          "args": ["Write some ????"]
+        },
+        "bothify": {
+          "value": "faker.bothify",
+          "args": ["He wrote ???? ### times."]
+        },
+        "asciify": {
+          "value": "faker.asciify",
+          "args": ["ascify ****"]
+        },
+        "regexify": {
+          "value": "faker.regexify",
+          "args": ["[A-Z0-9._%+-]"]
+        },
+        "toLower": {
+          "value": "faker.toLower",
+          "args": ["PlEaSe ChAnGe My CaSe"]
+        },
+        "toUpper": {
+          "value": "faker.toUpper",
+          "args": ["PlEaSe ChAnGe My CaSe"]
+        }
+      }      
+    },
+    "fakerBiasNumber" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "biasedNumberBetween": {
+          "value": "faker.biasedNumberBetween",
+          "args": [10,20,"sqrt"]
+        }
+      }      
+    },
+    "fakerUserAgentOS" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "macProcessor": {
+          "value": "faker.macProcessor"
+        },
+        "linuxProcessor": {
+          "value": "faker.linuxProcessor"
+        },
+        "userAgent": {
+          "value": "faker.userAgent"
+        },
+        "chrome": {
+          "value": "faker.chrome"
+        },
+        "firefox": {
+          "value": "faker.firefox"
+        },
+        "safari": {
+          "value": "faker.safari"
+        },
+        "opera": {
+          "value": "faker.opera"
+        },
+        "internetExplorer": {
+          "value": "faker.internetExplorer"
+        },
+        "windowsPlatformToken": {
+          "value": "faker.windowsPlatformToken"
+        },
+        "macPlatformToken": {
+          "value": "faker.macPlatformToken"
+        },
+        "linuxPlatformToken": {
+          "value": "faker.linuxPlatformToken"
+        }
+      }      
+    },
+    "fakerUuid" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "uuid": {
+          "value": "faker.uuid"
+        }
+      }      
+    },
+    "fakerMimeAndFile" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "mimeType": {
+          "value": "faker.mimeType"
+        },
+        "fileExtension": {
+          "value": "faker.fileExtension"
+        },
+        "imageUrl": {
+          "value": "faker.imageUrl",
+          "args": [640,480,null,true,"test"]
+        }
+      }      
+    },
+    "fakerColor" : {
+      "type": "object",
+      "minimum": 1,
+      "maximum": 1,
+      "properties": {
+        "hexColor": {
+          "value": "faker.hexColor"
+        },
+        "safeHexColor": {
+          "value": "faker.safeHexColor"
+        },
+        "rgbColor": {
+          "value": "faker.rgbColor"
+        },
+        "rgbColorAsArray": {
+          "value": "faker.rgbColorAsArray"
+        },
+        "rgbCssColor": {
+          "value": "faker.rgbCssColor"
+        },
+        "safeColorName": {
+          "value": "faker.safeColorName"
+        },
+        "colorName": {
+          "value": "faker.colorName"
+        }
+      }      
+    },
+    "fakerUnique" : {
+      "type": "object",
+      "minimum": 7,
+      "maximum": 7,
+      "properties": {
+        "uniqueRandomDigit": {
+          "value": "faker.numberBetween",
+          "args": [1,7],
+          "unique":true
+        }
+      }      
+    },
+    "fakerOptional" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "wordOptional": {
+          "value": "faker.word",
+          "optional":{
+            "weight": 0.5,
+            "default": null
+          }
+        }
+      }      
+    },
+    "fakerFromDefinitions" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "id": {
+          "value": "faker.incrementInteger",
+          "args": [1],
+          "provider": {
+          }
+        },
+        "lowerThanZero": {
+          "definition": "negativeNumber"
+        }
+      }      
+    },
+    "fakerIncrement" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "incrementNumber": {
+          "value": "faker.incrementInteger",
+          "args": [1],
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          }
+        }
+      }      
+    },
+    "fakerFKMany" : {
+      "type": "object",
+      "minimum": 20,
+      "maximum": 20,
+      "properties": {
+        "incrementNumber": {
+          "value": "faker.incrementInteger",
+          "args": [1],
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          }
+        },
+        "fkFrom_fakerFromDefinitions": {
+          "value": "faker.foreignKey",
+          "unique": true,
+          "provider": {
+            "source" : "\\Algenza\\Fjg\\Provider"
+          },
+          "fkConfig": {
+            "source": "fakerFromDefinitions",
+            "key": "id",
+            "multiple": false
+          }
+        }
+      }     
+    }
+  },
+  "required": [
+    "fakerName",
+    "fakerLocation",
+    "fakerBarcode",
+    "fakePhone",
+    "fakerCompany",
+    "fakerCreditCard",
+    "fakerText",
+    "fakerInternetAndMail",
+    "fakerDateTime",
+    "fakerMisc",
+    "fakerBase",
+    "fakerBiasNumber",
+    "fakerUserAgentOS",
+    "fakerUuid",
+    "fakerMimeAndFile",
+    "fakerColor",
+    "fakerUnique",
+    "fakerOptional",
+    "fakerFromDefinitions",
+    "fakerIncrement",
+    "fakerFKMany"
+  ],
+  "definitions": {
+    "negativeNumber": {
+      "value": "faker.numberBetween",
+      "args": [-2147483647,-1]
+    }
+  }
+}
