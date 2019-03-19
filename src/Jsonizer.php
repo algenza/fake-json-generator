@@ -183,30 +183,28 @@ class Jsonizer
 
 	private function fakerMaker($formatter, $isUnique = false, $optional = false, $param = [], $provider = null, $reset = false)
 	{
-		try {
-			if(isset($provider)){
-				$this->faker->addProvider(new $provider['source']($this->faker));
-			}
-			if($isUnique){
-				$this->faker = $this->faker->unique($reset,100);
-			}
-			if($optional){
-				$FakeOption = $this->faker->optional(
-					(isset($optional->weight))?$optional->weight:0.5,
-					(isset($optional->default))?$optional->default:null
-					);
-				if($FakeOption instanceof \Faker\DefaultGenerator){
-					return $FakeOption->default;
-				}
-				$this->faker = $FakeOption;
-			}
-			if(isset($param)){
-				return call_user_func_array([$this->faker, $formatter],$param);			
-			}
-			return call_user_func([$this->faker, $formatter]);			
-		} catch (\Exception $e) {
-			throw new \Exception($formatter.":".$e->getMessage(), 1);	
+
+		if(isset($provider)){
+			$this->faker->addProvider(new $provider['source']($this->faker));
 		}
+		if($isUnique){
+			$this->faker = $this->faker->unique($reset,100);
+		}
+		if($optional){
+			$FakeOption = $this->faker->optional(
+				(isset($optional->weight))?$optional->weight:0.5,
+				(isset($optional->default))?$optional->default:null
+				);
+			if($FakeOption instanceof \Faker\DefaultGenerator){
+				return $FakeOption->default;
+			}
+			$this->faker = $FakeOption;
+		}
+		if(isset($param)){
+			return call_user_func_array([$this->faker, $formatter],$param);			
+		}
+		return call_user_func([$this->faker, $formatter]);			
+
 	}
 
 }
