@@ -35,7 +35,6 @@ class Generator
 
 		}catch (\Exception $e){
 			throw new Exception($e->getMessage(), 1);
-			die;
 		}
 	}
 }
